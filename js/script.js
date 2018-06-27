@@ -9,9 +9,10 @@ $(document).ready(function() {
   $('.board td').on('click', checkForO);
   $('h1 span').on('mouseover', toe);
   $('h1 span').on('mouseleave', robot);
-})
-  var clickCount=0;
-  var winner = false;
+});
+
+var clickCount = 0;
+var winner = false;
 
 function goHere(e) {
   e.preventDefault();
@@ -22,40 +23,73 @@ function goHere(e) {
     var square = $(this);
     if (square.hasClass('player1') || square.hasClass('player2')) {
       alert("Seat's taken!");
-    } else if ($('h2 span').text()==="1") {
+    } else if ($('h2 span').text() === '1') {
       square.addClass('player1').data('player', 'x');
       square.text('X');
       clickCount++;
-      $('h2 span').text("2");
-    } else if ($('h2 span').text()==="2"){
+      $('h2 span').text('2');
+    } else if ($('h2 span').text() === '2') {
       square.addClass('player2').data('player', 'o');
-      square.text("O");
+      square.text('O');
       clickCount++;
-      $('h2 span').text("1");
-    };
+      $('h2 span').text('1');
+    }
   }
-};
+}
 
 function checkForX() {
   if (winner) {
     // do nothing
   } else {
-    for (var i = 0; i<3; i++) {
-      if (($('#row1 td').eq(i).data('player')=== 'x') && ($('#row2 td').eq(i).data('player')==='x') && ($('#row3 td').eq(i).data('player')==='x')) {
+    for (var i = 0; i < 3; i++) {
+      if (
+        $('#row1 td')
+          .eq(i)
+          .data('player') === 'x' &&
+        $('#row2 td')
+          .eq(i)
+          .data('player') === 'x' &&
+        $('#row3 td')
+          .eq(i)
+          .data('player') === 'x'
+      ) {
         player1Wins();
-      }};
+      }
+    }
 
-      if (($('#row1 td.player1').length === 3)||($('#row2 td.player1').length === 3)||($('#row3 td.player1').length === 3)) {
-        player1Wins();
-      }
-      else if (($('#row1 td').eq(0).data('player')=== 'x') && ($('#row2 td').eq(1).data('player')==='x') && ($('#row3 td').eq(2).data('player')==='x')) {
+    if (
+      $('#row1 td.player1').length === 3 ||
+      $('#row2 td.player1').length === 3 ||
+      $('#row3 td.player1').length === 3
+    ) {
       player1Wins();
-      }
-      else if ((($('#row1 td').eq(2).data('player')=== 'x') && ($('#row2 td').eq(1).data('player')==='x') && ($('#row3 td').eq(0).data('player')==='x'))) {
-        player1Wins();
-      }
-      if ((winner === false) && (clickCount===9) && ($('h2 span').text()==="2")) {
-        catGame();
+    } else if (
+      $('#row1 td')
+        .eq(0)
+        .data('player') === 'x' &&
+      $('#row2 td')
+        .eq(1)
+        .data('player') === 'x' &&
+      $('#row3 td')
+        .eq(2)
+        .data('player') === 'x'
+    ) {
+      player1Wins();
+    } else if (
+      $('#row1 td')
+        .eq(2)
+        .data('player') === 'x' &&
+      $('#row2 td')
+        .eq(1)
+        .data('player') === 'x' &&
+      $('#row3 td')
+        .eq(0)
+        .data('player') === 'x'
+    ) {
+      player1Wins();
+    }
+    if (winner === false && clickCount === 9 && $('h2 span').text() === '2') {
+      catGame();
     }
   }
 }
@@ -64,22 +98,54 @@ function checkForO() {
   if (winner) {
     // do nothing
   } else {
-    for (var i = 0; i<3; i++) {
-      if (($('#row1 td').eq(i).data('player')=== 'o') && ($('#row2 td').eq(i).data('player')==='o') && ($('#row3 td').eq(i).data('player')==='o')) {
+    for (var i = 0; i < 3; i++) {
+      if (
+        $('#row1 td')
+          .eq(i)
+          .data('player') === 'o' &&
+        $('#row2 td')
+          .eq(i)
+          .data('player') === 'o' &&
+        $('#row3 td')
+          .eq(i)
+          .data('player') === 'o'
+      ) {
         player2Wins();
-      }};
+      }
+    }
 
-    if (($('#row1 td.player2').length === 3)||($('#row2 td.player2').length === 3)||($('#row3 td.player2').length === 3)) {
+    if (
+      $('#row1 td.player2').length === 3 ||
+      $('#row2 td.player2').length === 3 ||
+      $('#row3 td.player2').length === 3
+    ) {
+      player2Wins();
+    } else if (
+      $('#row1 td')
+        .eq(0)
+        .data('player') === 'o' &&
+      $('#row2 td')
+        .eq(1)
+        .data('player') === 'o' &&
+      $('#row3 td')
+        .eq(2)
+        .data('player') === 'o'
+    ) {
+      player2Wins();
+    } else if (
+      $('#row1 td')
+        .eq(2)
+        .data('player') === 'o' &&
+      $('#row2 td')
+        .eq(1)
+        .data('player') === 'o' &&
+      $('#row3 td')
+        .eq(0)
+        .data('player') === 'o'
+    ) {
       player2Wins();
     }
-    else if (($('#row1 td').eq(0).data('player')=== 'o') && ($('#row2 td').eq(1).data('player')==='o') && ($('#row3 td').eq(2).data('player')==='o')) {
-    player2Wins();
-    }
-    else if ((($('#row1 td').eq(2).data('player')=== 'o') && ($('#row2 td').eq(1).data('player')==='o') && ($('#row3 td').eq(0).data('player')==='o'))) {
-      player2Wins();
-
-    };
-    if ((winner === false) && (clickCount===9)) {
+    if (winner === false && clickCount === 9) {
       catGame();
     }
   }
@@ -92,7 +158,6 @@ function player1Wins() {
   $('.content').append("<h1 class='winTag'>Player 1 Wins!</h1>");
   winner = true;
 }
-
 
 function player2Wins() {
   var oScore = +$('#p2Score').text();
@@ -110,14 +175,17 @@ function catGame() {
 function clearBoard() {
   $('.board td').data('player', '');
   $('.board td').removeClass('player1 player2');
-  $('.board td').text("");
+  $('.board td').text('');
   clickCount = 0;
   $('.winTag').remove();
   winner = false;
 }
 
 function toe() {
-  $('.background').css('background-image', 'url("http://www.paulkonrardy.com/images/Blog/MyLeftBigToe2.jpg")');
+  $('.background').css(
+    'background-image',
+    'url("http://www.paulkonrardy.com/images/Blog/MyLeftBigToe2.jpg")'
+  );
 }
 
 function robot() {
